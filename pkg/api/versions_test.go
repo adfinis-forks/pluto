@@ -252,6 +252,12 @@ func Test_IsVersioned(t *testing.T) {
 			want:    nil,
 			wantErr: true,
 		},
+		{
+			name:    "json list has version",
+			data:    []byte(`{"kind": "List", "apiVersion": "v1", "items":[{"kind": "Deployment", "apiVersion": "extensions/v1beta1"}]}`),
+			want:    []*Output{{APIVersion: &testVersionDeployment}},
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
